@@ -8,7 +8,7 @@ orbs:
 jobs:
   build-and-push:
     environment:
-      DOCKER_IMAGE: thantb2411/myapp
+      DOCKER_IMAGE: thanhtb2411/myapp
       DOCKER_TAG: latest
     executor: docker/docker
     steps:
