@@ -18,7 +18,8 @@ jobs:
           image: my_repo/orb-test
       - docker/push:
           digest-path: /tmp/digest.txt
-          image: my_repo/orb-test
+          image: thantb/myapp
+          tag: latest
       - run:
           command: |
             echo "Digest is: $(</tmp/digest.txt)"
