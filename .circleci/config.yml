@@ -46,4 +46,7 @@ workflows:
             branches:
               only:
                 - master
+      - deploy:
+         requires:
+          - build-and-push
 
