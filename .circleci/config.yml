@@ -7,9 +7,9 @@ orbs:
 
 jobs:
   build-and-push:
-    environment:
-      DOCKER_IMAGE: myapp
-      DOCKER_TAG: latest
+#    environment:
+#      DOCKER_IMAGE: myapp
+#      DOCKER_TAG: latest
     executor: docker/docker
     steps:
       - setup_remote_docker
