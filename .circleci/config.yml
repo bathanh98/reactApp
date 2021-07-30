@@ -9,7 +9,6 @@ jobs:
   build-and-push:
     environment:
       DOCKER_IMAGE: myapp
-      DOCKER_TAG: $CIRCLE_BRANCH
     executor: docker/docker
     steps:
       - setup_remote_docker
@@ -19,12 +18,12 @@ jobs:
           docker-password: DOCKER_PASSWORD
       - docker/build:
           image: $DOCKER_USER/$DOCKER_IMAGE
-          tag: $DOCKER_TAG
+          tag: $CIRCLE_BRANCH
 
       - docker/push:
           digest-path: /tmp/digest.txt
           image: $DOCKER_USER/$DOCKER_IMAGE
-          tag: $DOCKER_TAG
+          tag: $CIRCLE_BRANCH
       - run:
           command: |
             echo "Digest is: $(</tmp/digest.txt)"
@@ -34,7 +33,7 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - $SSH_KEY_FINGERPRINT
-      - run: ssh -oStrictHostKeyChecking=no $DEPLOYED_USER@$DEPLOYED_SERVER './deploy.sh $DOCKER_USER $DOCKER_IMAGE $DOCKER_TAG'
+      - run: ssh -oStrictHostKeyChecking=no $DEPLOYED_USER@$DEPLOYED_SERVER './deploy.sh $DOCKER_USER $DOCKER_IMAGE $CIRCLE_BRANCH'
 workflows:
   commit:
     jobs:
