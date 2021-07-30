@@ -1,6 +1,6 @@
 version: "3.3"
 services:
   mywebsite:
-    image: thanhtb2411/myapp:latest
+    image: $DOCKER_USER/$DOCKER_IMAGE:$DOCKER_TAG
     ports:
       - "80:80"

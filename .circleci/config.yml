@@ -9,7 +9,7 @@ jobs:
   build-and-push:
     environment:
       DOCKER_IMAGE: myapp
-      DOCKER_TAG: latest
+      DOCKER_TAG: $CIRCLE_BRANCH
     executor: docker/docker
     steps:
       - setup_remote_docker
@@ -34,7 +34,7 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - $SSH_KEY_FINGERPRINT
-      - run: ssh -oStrictHostKeyChecking=no $DEPLOYED_USER@$DEPLOYED_SERVER './deploy.sh'
+      - run: ssh -oStrictHostKeyChecking=no $DEPLOYED_USER@$DEPLOYED_SERVER './deploy.sh $DOCKER_USER $DOCKER_IMAGE $DOCKER_TAG'
 workflows:
   commit:
     jobs:
