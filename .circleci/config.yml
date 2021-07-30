@@ -51,11 +51,12 @@ workflows:
       #       branches:
       #         only:
       #           - master
-      - deploy
-        #  requires:
+      - deploy:
+          requires:
         #   - build-and-push
-           filters:
-             branches:
-               only:
-                 - master
+            - node/test
+          filters:
+            branches:
+              only:
+                - master
 
